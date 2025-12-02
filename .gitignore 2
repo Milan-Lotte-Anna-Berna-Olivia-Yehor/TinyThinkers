@@ -1,0 +1,31 @@
+# Flutter a Dart
+/build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+
+# Android Studio / IntelliJ
+.idea/
+.gradle/
+*.iml
+*.iws
+*.ipr
+/android/.gradle
+/android/local.properties
+
+# Mac OS (For collaboration with windows and macs)
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# VS Code
+.vscode/
+
+# Environemnt variables (API's)
+.env
+
+# FVM
+.fvm/flutter_sdk
