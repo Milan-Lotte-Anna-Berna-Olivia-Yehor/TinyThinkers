@@ -9,82 +9,113 @@ class DifficultyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          /// TOP-RIGHT avatar
-          Positioned(
-            top: 40,
-            right: 20,
-            child: Container(
-              width: 60,
-              height: 60,
-              padding: const EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 6,
-                  ),
-                ],
-              ),
-              child: Image.asset(selectedAvatar),
-            ),
-          ),
-
-          /// Difficulty buttons
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: const Color(0xFFFDF0E6),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            // --- HLAVNÝ OBSAH ---
+            Column(
               children: [
+                // 1. Header (Navigácia)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Tlačidlo SPÄŤ (Mozog + Text)
+                      GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: Row(
+                          children: [
+                            Image.asset('assets/images/brain.png', width: 50),
+                            const SizedBox(width: 10),
+                            const Text(
+                              "Tiny Thinkers",
+                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: Colors.black87),
+                            ),
+                          ],
+                        ),
+                      ),
+                      
+                      // Ikonka Avatara (len pre info / zmenu)
+                      GestureDetector(
+                        onTap: () => Navigator.pop(context), // Tiež vráti späť na výber
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: const Color(0xFF3B7EA0), width: 2),
+                          ),
+                          child: Image.asset(selectedAvatar, width: 40, height: 40),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const Spacer(flex: 1), // Pružná medzera
+
+                // 2. Nadpis
+                const Text(
+                  "Select Age",
+                  style: TextStyle(
+                    fontSize: 34, 
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF3B7EA0),
+                  ),
+                ),
+                
+                const SizedBox(height: 40),
+
+                // 3. Tlačidlá
                 _difficultyButton(context, "4 - 7 years old"),
-                const SizedBox(height: 30),
-
+                const SizedBox(height: 25),
                 _difficultyButton(context, "7 - 10 years old"),
-                const SizedBox(height: 30),
-
+                const SizedBox(height: 25),
                 _difficultyButton(context, "10 - 12 years old"),
+
+                const Spacer(flex: 2), // Pružná medzera dole
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  /// BUTTON BUILDER
   Widget _difficultyButton(BuildContext context, String label) {
     return SizedBox(
-      width: 260,
-      height: 60,
+      width: 300,
+      height: 75,
       child: ElevatedButton(
         onPressed: () {
-          // HERE is where the navigation happens
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => SubjectScreen(
                 selectedAvatar: selectedAvatar,
+                ageGroup: label,
               ),
             ),
           );
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF3B7EA0),
+          elevation: 6,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(25),
           ),
         ),
         child: Text(
           label,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 20,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
     );
   }
 }
-

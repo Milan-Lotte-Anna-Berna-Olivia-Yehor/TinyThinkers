@@ -57,8 +57,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/images/1_login.png
-    - assets/images/5_avatar_for_child.png
+    - assets/images/brain.png
     - assets/images/bird.png
     - assets/images/cat.png
     - assets/images/dog.png
